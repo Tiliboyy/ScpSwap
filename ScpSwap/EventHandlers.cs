@@ -7,6 +7,13 @@
 
 namespace ScpSwap
 {
+    using Exiled.API.Features;
+    using MEC;
+    using ScpSwap.Models;
+
+    /// <summary>
+    /// Handles events derived from <see cref="Exiled.Events.Handlers"/>.
+    /// </summary>
     public class EventHandlers
     {
         private readonly Plugin plugin;
@@ -17,10 +24,17 @@ namespace ScpSwap
         /// <param name="plugin">An instance of the <see cref="Plugin"/> class.</param>
         public EventHandlers(Plugin plugin) => this.plugin = plugin;
 
+        /// <inheritdoc cref="Exiled.Events.Handlers.Server.OnRoundStarted"/>
         public void OnRoundStarted()
         {
+            Timing.CallDelayed(1f, () =>
+            {
+                foreach (Player player in Player.Get(Team.SCP))
+                    player.Broadcast(plugin.Config.StartMessage);
+            });
         }
 
+        /// <inheritdoc cref="Exiled.Events.Handlers.Server.OnRestartingRound"/>
         public void OnRestartingRound()
         {
             Swap.Clear();

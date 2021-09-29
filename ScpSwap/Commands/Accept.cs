@@ -10,7 +10,11 @@ namespace ScpSwap.Commands
     using System;
     using CommandSystem;
     using Exiled.API.Features;
+    using ScpSwap.Models;
 
+    /// <summary>
+    /// Accepts an active swap request.
+    /// </summary>
     public class Accept : ICommand
     {
         /// <inheritdoc />
@@ -20,7 +24,7 @@ namespace ScpSwap.Commands
         public string[] Aliases { get; } = { "yes" };
 
         /// <inheritdoc />
-        public string Description { get; } = "Accepts an current swap request.";
+        public string Description { get; } = "Accepts an active swap request.";
 
         /// <inheritdoc />
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)

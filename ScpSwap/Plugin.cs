@@ -8,6 +8,7 @@
 namespace ScpSwap
 {
     using System;
+    using Exiled.API.Enums;
     using Exiled.API.Features;
 
     /// <summary>
@@ -26,10 +27,13 @@ namespace ScpSwap
         public override string Author { get; } = "Build";
 
         /// <inheritdoc />
-        public override string Name { get; } = "ScpSwap";
+        public override string Name { get; } = "ScpSwapParent";
 
         /// <inheritdoc />
         public override string Prefix { get; } = "scpswap";
+
+        /// <inheritdoc />
+        public override PluginPriority Priority { get; } = PluginPriority.Higher;
 
         /// <inheritdoc />
         public override Version RequiredExiledVersion { get; } = new Version(3, 0, 0);

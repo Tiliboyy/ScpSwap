@@ -8,6 +8,7 @@
 namespace ScpSwap
 {
     using System.ComponentModel;
+    using Exiled.API.Features;
     using Exiled.API.Interfaces;
 
     /// <inheritdoc />
@@ -22,6 +23,16 @@ namespace ScpSwap
         [Description("The duration, in seconds, before a swap request gets automatically deleted.")]
         public float RequestTimeout { get; set; } = 20f;
 
+        /// <summary>
+        /// Gets or sets the duration, in seconds, after the round starts that swap requests can be sent.
+        /// </summary>
+        [Description("The duration, in seconds, after the round starts that swap requests can be sent.")]
         public float SwapTimeout { get; set; } = 60f;
+
+        /// <summary>
+        /// Gets or sets the message to be displayed to all Scp subjects at the start of the round.
+        /// </summary>
+        [Description("The message to be displayed to all Scp subjects at the start of the round.")]
+        public Broadcast StartMessage { get; set; } = new Broadcast("<color=yellow><b>Did you know you can swap classes with other SCP's?</b></color> Simply type <color=orange>.scpswap (role number)</color> in your in-game console (not RA) to swap!", 15);
     }
 }

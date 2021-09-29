@@ -1,3 +1,3 @@
 ScpSwap
 
-This plugin stems from [King's Playground's](github.com/kingsplayground/SCPSwap) version of it.
+This plugin stems from the [King's Playground version](github.com/kingsplayground/SCPSwap) of it.

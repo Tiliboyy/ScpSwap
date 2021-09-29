@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ScpSwap.cs" company="Build">
+// <copyright file="ScpSwapParent.cs" company="Build">
 // Copyright (c) Build. All rights reserved.
 // Licensed under the CC BY-SA 3.0 license.
 // </copyright>
@@ -8,16 +8,21 @@
 namespace ScpSwap.Commands
 {
     using System;
+    using System.Linq;
     using CommandSystem;
     using Exiled.API.Features;
+    using ScpSwap.Models;
 
+    /// <summary>
+    /// The base command for ScpSwapParent.
+    /// </summary>
     [CommandHandler(typeof(ClientCommandHandler))]
-    public class ScpSwap : ParentCommand, IUsageProvider
+    public class ScpSwapParent : ParentCommand, IUsageProvider
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ScpSwap"/> class.
+        /// Initializes a new instance of the <see cref="ScpSwapParent"/> class.
         /// </summary>
-        public ScpSwap() => LoadGeneratedCommands();
+        public ScpSwapParent() => LoadGeneratedCommands();
 
         /// <inheritdoc />
         public override string Command { get; } = "scpswap";
@@ -26,14 +31,15 @@ namespace ScpSwap.Commands
         public override string[] Aliases { get; } = Array.Empty<string>();
 
         /// <inheritdoc />
-        public override string Description { get; } = "Base command for ScpSwap.";
+        public override string Description { get; } = "Base command for ScpSwapParent.";
 
         /// <inheritdoc />
-        public string[] Usage { get; } = { "Scp Number" };
+        public string[] Usage { get; } = { "ScpNumber" };
 
         /// <inheritdoc />
         public sealed override void LoadGeneratedCommands()
         {
+            RegisterCommand(new Accept());
             RegisterCommand(new Cancel());
         }
 
@@ -71,16 +77,29 @@ namespace ScpSwap.Commands
                 return false;
             }
 
-            Player receiver = Player.Get(arguments.At(0));
+            Player receiver = GetReceiver(arguments.At(0));
             if (receiver == null)
             {
-                response = "";
+                response = "Unable to locate a player with the requested role.";
                 return false;
             }
 
             Swap.Send(playerSender, receiver);
             response = "Request sent!";
             return true;
+        }
+
+        private Player GetReceiver(string request)
+        {
+            CustomSwap customSwap = ValidSwaps.GetCustom(request);
+            if (customSwap != null)
+                return Player.List.FirstOrDefault(player => customSwap.Verify(player));
+
+            RoleType roleSwap = ValidSwaps.Get(request);
+            if (Enum.IsDefined(typeof(RoleType), roleSwap))
+                return Player.List.FirstOrDefault(player => player.Role == roleSwap);
+
+            return null;
         }
     }
 }

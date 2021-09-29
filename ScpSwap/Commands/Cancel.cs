@@ -10,7 +10,9 @@ namespace ScpSwap.Commands
     using System;
     using CommandSystem;
 
-    /// <inheritdoc />
+    /// <summary>
+    /// "Cancels an active swap request.";
+    /// </summary>
     public class Cancel : ICommand
     {
         /// <inheritdoc />
