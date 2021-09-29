@@ -23,11 +23,10 @@ namespace ScpSwap.Models
         private static readonly List<CoroutineHandle> Coroutines = new List<CoroutineHandle>();
         private CoroutineHandle coroutine;
 
-        private Swap(Player sender, Player receiver, CustomSwap customSwap = null)
+        private Swap(Player sender, Player receiver)
         {
             Sender = sender;
             Receiver = receiver;
-            CustomSwap = customSwap;
 
             coroutine = Timing.RunCoroutine(RunTimeout());
             Coroutines.Add(coroutine);
@@ -43,11 +42,6 @@ namespace ScpSwap.Models
         /// Gets the person who was sent the swap request.
         /// </summary>
         public Player Receiver { get; }
-
-        /// <summary>
-        /// Gets the custom swap, if applicable.
-        /// </summary>
-        public CustomSwap CustomSwap { get; }
 
         /// <summary>
         /// Gets a swap request based on the sender.
