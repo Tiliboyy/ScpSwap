@@ -95,7 +95,7 @@ namespace ScpSwap.Commands
             if (customSwap != null)
                 return Player.List.FirstOrDefault(player => customSwap.VerificationMethod(player));
 
-            RoleType roleSwap = ValidSwaps.Get(request);
+            RoleType roleSwap = Plugin.Instance.ValidSwaps.Get(request);
             if (Enum.IsDefined(typeof(RoleType), roleSwap))
                 return Player.List.FirstOrDefault(player => player.Role == roleSwap);
 

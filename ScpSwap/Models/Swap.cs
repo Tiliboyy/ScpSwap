@@ -11,7 +11,6 @@ namespace ScpSwap.Models
     using Exiled.API.Features;
     using Exiled.Events.EventArgs;
     using MEC;
-    using UnityEngine;
 
     /// <summary>
     /// Handles the swapping of players.
@@ -119,6 +118,15 @@ namespace ScpSwap.Models
         public void Cancel()
         {
             Sender.Broadcast(5, "Swap request cancelled!", shouldClearPrevious: true);
+            Destroy();
+        }
+
+        /// <summary>
+        /// Broadcasts the swap decline then destroys the swap.
+        /// </summary>
+        public void Decline()
+        {
+            Sender.Broadcast(5, $"{Receiver.Nickname} has declined your swap request.", shouldClearPrevious: true);
             Destroy();
         }
 
