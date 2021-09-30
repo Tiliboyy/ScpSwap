@@ -9,9 +9,11 @@ namespace ScpSwap.Commands
 {
     using System;
     using CommandSystem;
+    using Exiled.API.Features;
+    using ScpSwap.Models;
 
     /// <summary>
-    /// "Cancels an active swap request.";
+    /// Cancels an active swap request.
     /// </summary>
     public class Cancel : ICommand
     {
@@ -27,7 +29,17 @@ namespace ScpSwap.Commands
         /// <inheritdoc />
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            throw new NotImplementedException();
+            Player playerSender = Player.Get(sender as CommandSender);
+            Swap swap = Swap.FromSender(playerSender);
+            if (swap == null)
+            {
+                response = "You do not have an active swap request.";
+                return false;
+            }
+
+            swap.Cancel();
+            response = "Swap request cancelled!";
+            return true;
         }
     }
 }

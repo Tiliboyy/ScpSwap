@@ -5,12 +5,11 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using Exiled.Events.EventArgs;
-
 namespace ScpSwap.Models
 {
     using System.Collections.Generic;
     using Exiled.API.Features;
+    using Exiled.Events.EventArgs;
     using MEC;
     using UnityEngine;
 
@@ -103,21 +102,11 @@ namespace ScpSwap.Models
         public void Run()
         {
             PartiallyDestroy();
-            RoleType senderRole = Sender.Role;
-            Vector3 senderPosition = Sender.Position;
-            float senderHealth = Sender.Health;
+            SwapData senderData = new SwapData(Sender);
+            SwapData receiverData = new SwapData(Receiver);
 
-            RoleType receiverRole = Receiver.Role;
-            Vector3 receiverPosition = Receiver.Position;
-            float receiverHealth = Receiver.Health;
-
-            Sender.Role = receiverRole;
-            Sender.Position = receiverPosition;
-            Sender.Health = receiverHealth;
-
-            Receiver.Role = senderRole;
-            Receiver.Position = senderPosition;
-            Receiver.Health = senderHealth;
+            senderData.Swap(Receiver);
+            receiverData.Swap(Sender);
 
             Sender.SendConsoleMessage("Swap successful!", "green");
             Receiver.SendConsoleMessage("Swap successful!", "green");
@@ -129,7 +118,7 @@ namespace ScpSwap.Models
         /// </summary>
         public void Cancel()
         {
-            Sender.Broadcast(5, "ScpSwap request cancelled!", shouldClearPrevious: true);
+            Sender.Broadcast(5, "Swap request cancelled!", shouldClearPrevious: true);
             Destroy();
         }
 

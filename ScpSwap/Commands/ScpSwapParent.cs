@@ -91,9 +91,9 @@ namespace ScpSwap.Commands
 
         private Player GetReceiver(string request)
         {
-            CustomSwap customSwap = ValidSwaps.GetCustom(request);
+            CustomSwap customSwap = CustomSwap.Get(request);
             if (customSwap != null)
-                return Player.List.FirstOrDefault(player => customSwap.Verify(player));
+                return Player.List.FirstOrDefault(player => customSwap.VerificationMethod(player));
 
             RoleType roleSwap = ValidSwaps.Get(request);
             if (Enum.IsDefined(typeof(RoleType), roleSwap))

@@ -14,8 +14,6 @@ namespace ScpSwap
 
     public static class ValidSwaps
     {
-        private static readonly List<CustomSwap> CustomSwaps = new List<CustomSwap>();
-
         private static readonly Dictionary<string, RoleType> DefaultSwaps = new Dictionary<string, RoleType>
         {
             ["173"] = RoleType.Scp173,
@@ -38,22 +36,11 @@ namespace ScpSwap
             ["zombie"] = RoleType.Scp0492,
         };
 
-        public static void Add(string name, Action<Player> spawnMethod, Func<Player, bool> verificationMethod)
-        {
-            CustomSwaps.Add(new CustomSwap(name, spawnMethod, verificationMethod));
-        }
-
-        public static CustomSwap GetCustom(string request)
-        {
-            foreach (CustomSwap customSwap in CustomSwaps)
-            {
-                if (string.Equals(request, customSwap.Name, StringComparison.OrdinalIgnoreCase))
-                    return customSwap;
-            }
-
-            return null;
-        }
-
+        /// <summary>
+        /// Attempts to get a <see cref="RoleType"/> from <see cref="DefaultSwaps"/> or from directly parsing a request.
+        /// </summary>
+        /// <param name="request">The query to get the <see cref="RoleType"/>.</param>
+        /// <returns>The found <see cref="RoleType"/>.</returns>
         public static RoleType Get(string request)
         {
             if (!DefaultSwaps.TryGetValue(request, out var roleType))
