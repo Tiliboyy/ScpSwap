@@ -55,9 +55,9 @@ namespace ScpSwap
                 return roleType;
 
             if (Enum.TryParse(request, true, out RoleType parsedRole) && DefaultSwaps.Contains(parsedRole))
-                roleType = parsedRole;
+                return parsedRole;
 
-            return roleType;
+            return RoleType.None;
         }
 
         /// <summary>

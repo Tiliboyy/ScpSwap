@@ -121,7 +121,7 @@ namespace ScpSwap.Commands
             }
 
             RoleType roleSwap = ValidSwaps.Get(request);
-            if (Enum.IsDefined(typeof(RoleType), roleSwap))
+            if (Enum.IsDefined(typeof(RoleType), roleSwap) && roleSwap != RoleType.None)
             {
                 spawnMethod = player => player.Role = roleSwap;
                 return Player.List.FirstOrDefault(player => player.Role == roleSwap);
