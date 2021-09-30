@@ -128,6 +128,12 @@ namespace ScpSwap
                 if (Plugin.Instance.Config.BlacklistedScps.Contains(kvp.Value) || kvp.Value.GetTeam() != Team.SCP)
                     continue;
 
+                if (NamesValue.Contains(kvp.Key, StringComparison.OrdinalIgnoreCase))
+                {
+                    Log.Warn($"Failed to add a translation that was a duplicate of another swap with the name of {kvp.Key}.");
+                    continue;
+                }
+
                 TranslatableSwapsValue.Add(kvp.Key, kvp.Value);
                 NamesValue.Add(kvp.Key);
             }
