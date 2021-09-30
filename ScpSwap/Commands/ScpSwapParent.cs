@@ -10,6 +10,7 @@ namespace ScpSwap.Commands
     using System;
     using System.Linq;
     using CommandSystem;
+    using Exiled.API.Extensions;
     using Exiled.API.Features;
     using ScpSwap.Models;
 
@@ -120,7 +121,7 @@ namespace ScpSwap.Commands
             }
 
             RoleType roleSwap = Plugin.Instance.ValidSwaps.Get(request);
-            if (Enum.IsDefined(typeof(RoleType), roleSwap))
+            if (Enum.IsDefined(typeof(RoleType), roleSwap) && roleSwap.GetTeam() == Team.SCP)
             {
                 spawnMethod = player => player.Role = roleSwap;
                 return Player.List.FirstOrDefault(player => player.Role == roleSwap);

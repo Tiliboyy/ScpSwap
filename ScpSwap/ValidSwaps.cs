@@ -62,7 +62,7 @@ namespace ScpSwap
 
             foreach (string role in Enum.GetNames(typeof(RoleType)))
             {
-                if (!names.Contains(role))
+                if (role.Contains("Scp") && !names.Contains(role))
                     names.Add(role);
             }
         }
