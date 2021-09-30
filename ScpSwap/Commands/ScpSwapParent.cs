@@ -113,15 +113,15 @@ namespace ScpSwap.Commands
 
         private Player GetReceiver(string request, out Action<Player> spawnMethod)
         {
-            CustomSwap customSwap = CustomSwap.Get(request);
+            CustomSwap customSwap = ValidSwaps.GetCustom(request);
             if (customSwap != null)
             {
                 spawnMethod = customSwap.SpawnMethod;
                 return Player.List.FirstOrDefault(player => customSwap.VerificationMethod(player));
             }
 
-            RoleType roleSwap = Plugin.Instance.ValidSwaps.Get(request);
-            if (Enum.IsDefined(typeof(RoleType), roleSwap) && roleSwap.GetTeam() == Team.SCP)
+            RoleType roleSwap = ValidSwaps.Get(request);
+            if (Enum.IsDefined(typeof(RoleType), roleSwap))
             {
                 spawnMethod = player => player.Role = roleSwap;
                 return Player.List.FirstOrDefault(player => player.Role == roleSwap);

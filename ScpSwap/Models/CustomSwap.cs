@@ -82,37 +82,5 @@ namespace ScpSwap.Models
             Log.Warn($"Attempted to remove an unregistered {nameof(CustomSwap)} with a name of {customSwap.Name}.");
             return false;
         }
-
-        /// <summary>
-        /// Returns a <see cref="CustomSwap"/> with a matching name to the provided one.
-        /// </summary>
-        /// <param name="name">The name to search for.</param>
-        /// <returns>The found <see cref="CustomSwap"/> or null if one is not found.</returns>
-        public static CustomSwap Get(string name)
-        {
-            foreach (CustomSwap customSwap in Registered)
-            {
-                if (string.Equals(name, customSwap.Name, StringComparison.OrdinalIgnoreCase))
-                    return customSwap;
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Checks a <see cref="Player"/> to see if they have a custom class.
-        /// </summary>
-        /// <param name="player">The <see cref="Player"/> to check.</param>
-        /// <returns>The found <see cref="CustomSwap"/> or null if one is not found.</returns>
-        public static CustomSwap Get(Player player)
-        {
-            foreach (CustomSwap customSwap in Registered)
-            {
-                if (customSwap.VerificationMethod(player))
-                    return customSwap;
-            }
-
-            return null;
-        }
     }
 }

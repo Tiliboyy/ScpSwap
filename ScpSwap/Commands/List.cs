@@ -31,7 +31,7 @@ namespace ScpSwap.Commands
         {
             StringBuilder stringBuilder = StringBuilderPool.Shared.Rent();
             stringBuilder.AppendLine("Available Roles:");
-            stringBuilder.Append(string.Join(Environment.NewLine, Plugin.Instance.ValidSwaps.Names));
+            stringBuilder.Append(string.Join(Environment.NewLine, ValidSwaps.Names));
             response = StringBuilderPool.Shared.ToStringReturn(stringBuilder);
             return true;
         }

@@ -14,7 +14,7 @@ namespace ScpSwap
     /// <summary>
     /// The main plugin class.
     /// </summary>
-    public class Plugin : Plugin<Config, Translations>
+    public class Plugin : Plugin<Config, Translation>
     {
         private EventHandlers eventHandlers;
 
@@ -22,11 +22,6 @@ namespace ScpSwap
         /// Gets the only existing instance of the <see cref="Plugin"/> class.
         /// </summary>
         public static Plugin Instance { get; private set; }
-
-        /// <summary>
-        /// Gets an instance of the <see cref="ScpSwap.ValidSwaps"/> class.
-        /// </summary>
-        public ValidSwaps ValidSwaps { get; private set; }
 
         /// <inheritdoc />
         public override string Author { get; } = "Build";
@@ -50,11 +45,11 @@ namespace ScpSwap
         public override void OnEnabled()
         {
             Instance = this;
-            ValidSwaps = new ValidSwaps(this);
             eventHandlers = new EventHandlers(this);
             Exiled.Events.Handlers.Server.ReloadedConfigs += eventHandlers.OnReloadedConfigs;
             Exiled.Events.Handlers.Server.RestartingRound += eventHandlers.OnRestartingRound;
             Exiled.Events.Handlers.Server.RoundStarted += eventHandlers.OnRoundStarted;
+            Exiled.Events.Handlers.Server.WaitingForPlayers += eventHandlers.OnWaitingForPlayers;
             base.OnEnabled();
         }
 
@@ -64,8 +59,8 @@ namespace ScpSwap
             Exiled.Events.Handlers.Server.ReloadedConfigs -= eventHandlers.OnReloadedConfigs;
             Exiled.Events.Handlers.Server.RestartingRound -= eventHandlers.OnRestartingRound;
             Exiled.Events.Handlers.Server.RoundStarted -= eventHandlers.OnRoundStarted;
+            Exiled.Events.Handlers.Server.WaitingForPlayers -= eventHandlers.OnWaitingForPlayers;
             eventHandlers = null;
-            ValidSwaps = null;
             Instance = null;
             base.OnDisabled();
         }

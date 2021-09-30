@@ -36,6 +36,21 @@ namespace ScpSwap
         public bool AllowNewScps { get; set; } = true;
 
         /// <summary>
+        /// Gets or sets a collection of roles blacklisted from being swapped to.
+        /// </summary>
+        [Description("A collection of roles blacklisted from being swapped to.")]
+        public RoleType[] BlacklistedScps { get; set; } =
+        {
+            RoleType.Scp0492,
+        };
+
+        /// <summary>
+        /// Gets or sets a collection of the names of custom scps blacklisted from being swapped to. This must match the name the developer integrated the SCP into this plugin's API with.
+        /// </summary>
+        [Description("A collection of the names of custom scps blacklisted from being swapped to. This must match the name the developer integrated the SCP into this plugin's API with.")]
+        public string[] BlacklistedNames { get; set; } = { };
+
+        /// <summary>
         /// Gets or sets the message to be displayed to all Scp subjects at the start of the round.
         /// </summary>
         [Description("The message to be displayed to all Scp subjects at the start of the round.")]

@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="Translations.cs" company="Build">
+// <copyright file="Translation.cs" company="Build">
 // Copyright (c) Build. All rights reserved.
 // Licensed under the CC BY-SA 3.0 license.
 // </copyright>
@@ -12,13 +12,13 @@ namespace ScpSwap
     using Exiled.API.Interfaces;
 
     /// <inheritdoc />
-    public class Translations : ITranslation
+    public class Translation : ITranslation
     {
         /// <summary>
         /// Gets or sets a collection of custom names with their correlating <see cref="RoleType"/>.
         /// </summary>
         [Description("A collection of custom names with their correlating RoleType.")]
-        public Dictionary<string, RoleType> DefaultSwaps { get; set; } = new Dictionary<string, RoleType>
+        public Dictionary<string, RoleType> TranslatableSwaps { get; set; } = new Dictionary<string, RoleType>
         {
             ["173"] = RoleType.Scp173,
             ["peanut"] = RoleType.Scp173,

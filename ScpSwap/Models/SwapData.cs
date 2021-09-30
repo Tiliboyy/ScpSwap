@@ -29,7 +29,7 @@ namespace ScpSwap.Models
             role = player.Role;
             position = player.Position;
             health = player.Health;
-            customSwap = CustomSwap.Get(player);
+            customSwap = ValidSwaps.GetCustom(player);
         }
 
         /// <summary>

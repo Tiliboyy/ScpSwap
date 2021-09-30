@@ -27,7 +27,7 @@ namespace ScpSwap
         /// <inheritdoc cref="Exiled.Events.Handlers.Server.OnReloadedConfigs"/>
         public void OnReloadedConfigs()
         {
-            plugin.ValidSwaps.Refresh();
+            ValidSwaps.Refresh();
         }
 
         /// <inheritdoc cref="Exiled.Events.Handlers.Server.OnRestartingRound"/>
@@ -44,6 +44,12 @@ namespace ScpSwap
                 foreach (Player player in Player.Get(Team.SCP))
                     player.Broadcast(plugin.Config.StartMessage);
             });
+        }
+
+        /// <inheritdoc cref="Exiled.Events.Handlers.Server.OnWaitingForPlayers"/>
+        public void OnWaitingForPlayers()
+        {
+            ValidSwaps.Refresh();
         }
     }
 }
