@@ -130,7 +130,7 @@ namespace ScpSwap
 
                 if (NamesValue.Contains(kvp.Key, StringComparison.OrdinalIgnoreCase))
                 {
-                    Log.Warn($"Failed to add a translation that was a duplicate of another swap with the name of {kvp.Key}.");
+                    Log.Debug($"Failed to add a translation that was a duplicate of another swap with the name of {kvp.Key}.", Plugin.Instance.Config.ShowDebug);
                     continue;
                 }
 
@@ -147,8 +147,15 @@ namespace ScpSwap
                 if (Plugin.Instance.Config.BlacklistedScps.Contains(role) || role.GetTeam() != Team.SCP)
                     continue;
 
+                string roleText = role.ToString();
+                if (NamesValue.Contains(roleText, StringComparison.OrdinalIgnoreCase))
+                {
+                    Log.Debug($"Failed to add a translation that was a duplicate of another swap with the name of {roleText}.", Plugin.Instance.Config.ShowDebug);
+                    continue;
+                }
+
                 DefaultSwapsValue.Add(role);
-                NamesValue.Add(role.ToString());
+                NamesValue.Add(roleText);
             }
         }
     }

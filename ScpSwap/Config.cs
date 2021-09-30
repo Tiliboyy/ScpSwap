@@ -18,6 +18,12 @@ namespace ScpSwap
         public bool IsEnabled { get; set; } = true;
 
         /// <summary>
+        /// Gets or sets a value indicating whether debug messages should be shown.
+        /// </summary>
+        [Description("Indicates whether debug messages should be shown.")]
+        public bool ShowDebug { get; set; } = false;
+
+        /// <summary>
         /// Gets or sets the duration, in seconds, before a swap request gets automatically deleted.
         /// </summary>
         [Description("The duration, in seconds, before a swap request gets automatically deleted.")]
