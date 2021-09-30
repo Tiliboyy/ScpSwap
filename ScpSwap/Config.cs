@@ -30,6 +30,12 @@ namespace ScpSwap
         public float SwapTimeout { get; set; } = 60f;
 
         /// <summary>
+        /// Gets or sets a value indicating whether a player can switch to a class if there is nobody playing as it.
+        /// </summary>
+        [Description("Indicates whether a player can switch to a class if there is nobody playing as it.")]
+        public bool AllowNewScps { get; set; } = true;
+
+        /// <summary>
         /// Gets or sets the message to be displayed to all Scp subjects at the start of the round.
         /// </summary>
         [Description("The message to be displayed to all Scp subjects at the start of the round.")]

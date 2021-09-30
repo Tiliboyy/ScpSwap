@@ -32,7 +32,7 @@ namespace ScpSwap
         public override string Author { get; } = "Build";
 
         /// <inheritdoc />
-        public override string Name { get; } = "ScpSwapParent";
+        public override string Name { get; } = "ScpSwap";
 
         /// <inheritdoc />
         public override string Prefix { get; } = "scpswap";

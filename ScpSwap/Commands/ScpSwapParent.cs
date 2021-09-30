@@ -41,6 +41,8 @@ namespace ScpSwap.Commands
         {
             RegisterCommand(new Accept());
             RegisterCommand(new Cancel());
+            RegisterCommand(new Decline());
+            RegisterCommand(new List());
         }
 
         /// <inheritdoc />
@@ -54,7 +56,7 @@ namespace ScpSwap.Commands
 
             if (Round.ElapsedTime.TotalSeconds > Plugin.Instance.Config.SwapTimeout)
             {
-                response = "The Scp swap period has ended.";
+                response = "The swap period has ended.";
                 return false;
             }
 
@@ -77,28 +79,54 @@ namespace ScpSwap.Commands
                 return false;
             }
 
-            Player receiver = GetReceiver(arguments.At(0));
-            if (receiver == null)
+            Player receiver = GetReceiver(arguments.At(0), out Action<Player> spawnMethod);
+            if (receiver != null)
             {
-                response = "Unable to locate a player with the requested role.";
+                if (playerSender == receiver)
+                {
+                    response = "You can't swap with yourself, idiot.";
+                    return false;
+                }
+
+                Swap.Send(playerSender, receiver);
+                response = "Request sent!";
+                return true;
+            }
+
+            if (spawnMethod == null)
+            {
+                response = "Unable to find the specified role. Please refer to the list command for available roles.";
                 return false;
             }
 
-            Swap.Send(playerSender, receiver);
-            response = "Request sent!";
-            return true;
+            if (Plugin.Instance.Config.AllowNewScps)
+            {
+                spawnMethod(playerSender);
+                response = "Swap successful.";
+                return true;
+            }
+
+            response = "Unable to locate a player with the requested role.";
+            return false;
         }
 
-        private Player GetReceiver(string request)
+        private Player GetReceiver(string request, out Action<Player> spawnMethod)
         {
             CustomSwap customSwap = CustomSwap.Get(request);
             if (customSwap != null)
+            {
+                spawnMethod = customSwap.SpawnMethod;
                 return Player.List.FirstOrDefault(player => customSwap.VerificationMethod(player));
+            }
 
             RoleType roleSwap = Plugin.Instance.ValidSwaps.Get(request);
             if (Enum.IsDefined(typeof(RoleType), roleSwap))
+            {
+                spawnMethod = player => player.Role = roleSwap;
                 return Player.List.FirstOrDefault(player => player.Role == roleSwap);
+            }
 
+            spawnMethod = null;
             return null;
         }
     }
