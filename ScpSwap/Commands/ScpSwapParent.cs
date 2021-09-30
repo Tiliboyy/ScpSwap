@@ -84,12 +84,6 @@ namespace ScpSwap.Commands
                 return false;
             }
 
-            if (Swap.FromReceiver(receiver) != null)
-            {
-                response = "That player already has a pending swap request!";
-                return false;
-            }
-
             Swap.Send(playerSender, receiver);
             response = "Request sent!";
             return true;
