@@ -138,7 +138,7 @@ namespace ScpSwap
             DefaultSwapsValue.Clear();
             foreach (RoleType role in Enum.GetValues(typeof(RoleType)))
             {
-                if (role.GetTeam() != Team.SCP)
+                if (Plugin.Instance.Config.BlacklistedScps.Contains(role) || role.GetTeam() != Team.SCP)
                     continue;
 
                 DefaultSwapsValue.Add(role);
