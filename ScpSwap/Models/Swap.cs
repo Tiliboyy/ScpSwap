@@ -147,10 +147,9 @@ namespace ScpSwap.Models
 
         private void SendRequestMessages()
         {
-            CustomSwap customSwap = ValidSwaps.GetCustom(Sender);
             string consoleMessage = Plugin.Instance.Translation.RequestConsoleMessage;
             consoleMessage = consoleMessage.Replace("$SenderName", Sender.Nickname);
-            consoleMessage = consoleMessage.Replace("$RoleName", customSwap?.Name ?? Sender.Role.ToString());
+            consoleMessage = consoleMessage.Replace("$RoleName", ValidSwaps.GetCustom(Sender)?.Name ?? Sender.Role.ToString());
             Receiver.SendConsoleMessage(consoleMessage, "yellow");
             Receiver.Broadcast(Plugin.Instance.Translation.RequestBroadcast);
         }
