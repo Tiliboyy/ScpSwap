@@ -29,7 +29,7 @@ namespace ScpSwap.Commands
         /// <inheritdoc />
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            Player playerSender = Player.Get(sender as CommandSender);
+            Player playerSender = Player.Get(sender);
             Swap swap = Swap.FromSender(playerSender);
             if (swap == null)
             {

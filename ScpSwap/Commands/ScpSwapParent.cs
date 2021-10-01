@@ -67,7 +67,7 @@ namespace ScpSwap.Commands
                 return false;
             }
 
-            Player playerSender = Player.Get(sender as CommandSender);
+            Player playerSender = Player.Get(sender);
             if (!playerSender.IsScp && ValidSwaps.GetCustom(playerSender) == null)
             {
                 response = "I don't believe you are an Scp.";
