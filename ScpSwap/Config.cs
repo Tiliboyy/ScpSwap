@@ -55,11 +55,5 @@ namespace ScpSwap
         /// </summary>
         [Description("A collection of the names of custom scps blacklisted from being swapped to. This must match the name the developer integrated the SCP into this plugin's API with.")]
         public string[] BlacklistedNames { get; set; } = { };
-
-        /// <summary>
-        /// Gets or sets the message to be displayed to all Scp subjects at the start of the round.
-        /// </summary>
-        [Description("The message to be displayed to all Scp subjects at the start of the round.")]
-        public Broadcast StartMessage { get; set; } = new Broadcast("<color=yellow><b>Did you know you can swap classes with other SCP's?</b></color> Simply type <color=orange>.scpswap (role number)</color> in your in-game console (not RA) to swap!", 15);
     }
 }

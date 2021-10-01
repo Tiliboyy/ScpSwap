@@ -42,7 +42,7 @@ namespace ScpSwap
             Timing.CallDelayed(1f, () =>
             {
                 foreach (Player player in Player.Get(Team.SCP))
-                    player.Broadcast(plugin.Config.StartMessage);
+                    player.Broadcast(plugin.Translation.StartMessage);
             });
         }
 

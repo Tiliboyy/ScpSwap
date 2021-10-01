@@ -26,6 +26,7 @@ namespace ScpSwap.Models
             Sender = sender;
             Receiver = receiver;
 
+            SendRequestMessages();
             coroutine = Timing.RunCoroutine(RunTimeout());
             Coroutines.Add(coroutine);
             Exiled.Events.Handlers.Player.ChangingRole += OnChangingRole;
@@ -142,6 +143,16 @@ namespace ScpSwap.Models
         {
             PartiallyDestroy();
             Swaps.Remove(this);
+        }
+
+        private void SendRequestMessages()
+        {
+            CustomSwap customSwap = ValidSwaps.GetCustom(Sender);
+            string consoleMessage = Plugin.Instance.Translation.RequestConsoleMessage;
+            consoleMessage = consoleMessage.Replace("$SenderName", Sender.Nickname);
+            consoleMessage = consoleMessage.Replace("$RoleName", customSwap?.Name ?? Sender.Role.ToString());
+            Receiver.SendConsoleMessage(consoleMessage, "yellow");
+            Receiver.Broadcast(Plugin.Instance.Translation.RequestBroadcast);
         }
 
         private void OnChangingRole(ChangingRoleEventArgs ev)

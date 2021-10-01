@@ -9,6 +9,7 @@ namespace ScpSwap
 {
     using System.Collections.Generic;
     using System.ComponentModel;
+    using Exiled.API.Features;
     using Exiled.API.Interfaces;
 
     /// <inheritdoc />
@@ -39,5 +40,21 @@ namespace ScpSwap
             ["492"] = RoleType.Scp0492,
             ["zombie"] = RoleType.Scp0492,
         };
+
+        /// <summary>
+        /// Gets or sets the message to be displayed to all Scp subjects at the start of the round.
+        /// </summary>
+        [Description("The message to be displayed to all Scp subjects at the start of the round.")]
+        public Broadcast StartMessage { get; set; } = new Broadcast("<color=yellow><b>Did you know you can swap classes with other SCP's?</b></color> Simply type <color=orange>.scpswap (role number)</color> in your in-game console (not RA) to swap!", 15);
+
+        /// <summary>
+        /// Gets or sets the broadcast to display to the receiver of a swap request.
+        /// </summary>
+        public Broadcast RequestBroadcast { get; set; } = new Broadcast("<i>You have an SCP Swap request!\nCheck your console by pressing [`] or [~]</i>", 5);
+
+        /// <summary>
+        /// Gets or sets the console message to send to the receiver of a swap request.
+        /// </summary>
+        public string RequestConsoleMessage { get; set; } = $"You have received a swap request from $SenderName who is SCP-$RoleName. Would you like to swap with them? Type \".scpswap accept\" to accept or \".scpswap decline\" to decline.";
     }
 }
