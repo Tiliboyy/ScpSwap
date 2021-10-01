@@ -11,6 +11,7 @@ namespace ScpSwap
     using System.ComponentModel;
     using Exiled.API.Features;
     using Exiled.API.Interfaces;
+    using ScpSwap.Models;
 
     /// <inheritdoc />
     public class Translation : ITranslation
@@ -50,11 +51,25 @@ namespace ScpSwap
         /// <summary>
         /// Gets or sets the broadcast to display to the receiver of a swap request.
         /// </summary>
+        [Description("The broadcast to display to the receiver of a swap request.")]
         public Broadcast RequestBroadcast { get; set; } = new Broadcast("<i>You have an SCP Swap request!\nCheck your console by pressing [`] or [~]</i>", 5);
 
         /// <summary>
         /// Gets or sets the console message to send to the receiver of a swap request.
         /// </summary>
-        public string RequestConsoleMessage { get; set; } = $"You have received a swap request from $SenderName who is SCP-$RoleName. Would you like to swap with them? Type \".scpswap accept\" to accept or \".scpswap decline\" to decline.";
+        [Description("The console message to send to the receiver of a swap request.")]
+        public ConsoleMessage RequestConsoleMessage { get; set; } = new ConsoleMessage($"You have received a swap request from $SenderName who is SCP-$RoleName. Would you like to swap with them? Type \".scpswap accept\" to accept or \".scpswap decline\" to decline.", "yellow");
+
+        /// <summary>
+        /// Gets or sets the console message to send to the sender of a swap request that has timed out.
+        /// </summary>
+        [Description("The console message to send to the sender of a swap request that has timed out.")]
+        public ConsoleMessage TimeoutSender { get; set; } = new ConsoleMessage("The player did not respond to your request.", "red");
+
+        /// <summary>
+        /// Gets or sets the console message to send to the receiver of a swap request that has timed out.
+        /// </summary>
+        [Description("The console message to send to the receiver of a swap request that has timed out.")]
+        public ConsoleMessage TimeoutReceiver { get; set; } = new ConsoleMessage("Your swap request has timed out.", "red");
     }
 }

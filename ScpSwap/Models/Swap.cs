@@ -147,10 +147,10 @@ namespace ScpSwap.Models
 
         private void SendRequestMessages()
         {
-            string consoleMessage = Plugin.Instance.Translation.RequestConsoleMessage;
+            string consoleMessage = Plugin.Instance.Translation.RequestConsoleMessage.Message;
             consoleMessage = consoleMessage.Replace("$SenderName", Sender.Nickname);
             consoleMessage = consoleMessage.Replace("$RoleName", ValidSwaps.GetCustom(Sender)?.Name ?? Sender.Role.ToString());
-            Receiver.SendConsoleMessage(consoleMessage, "yellow");
+            Receiver.SendConsoleMessage(consoleMessage, Plugin.Instance.Translation.RequestConsoleMessage.Color);
             Receiver.Broadcast(Plugin.Instance.Translation.RequestBroadcast);
         }
 
@@ -163,6 +163,8 @@ namespace ScpSwap.Models
         private IEnumerator<float> RunTimeout()
         {
             yield return Timing.WaitForSeconds(Plugin.Instance.Config.RequestTimeout);
+            Plugin.Instance.Translation.TimeoutSender.SendTo(Sender);
+            Plugin.Instance.Translation.TimeoutReceiver.SendTo(Receiver);
             Destroy();
         }
     }
