@@ -12,10 +12,10 @@ namespace ScpSwap.Models
     /// <summary>
     /// Container to make translations for console messages more fun.
     /// </summary>
-    public class ConsoleMessage
+    public struct ConsoleMessage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConsoleMessage"/> class.
+        /// Initializes a new instance of the <see cref="ConsoleMessage"/> struct.
         /// </summary>
         /// <param name="message"><inheritdoc cref="Message"/></param>
         /// <param name="color"><inheritdoc cref="Color"/></param>
