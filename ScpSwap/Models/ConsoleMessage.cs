@@ -12,7 +12,7 @@ namespace ScpSwap.Models
     /// <summary>
     /// Container to make translations for console messages more fun.
     /// </summary>
-    public struct ConsoleMessage
+    public readonly struct ConsoleMessage
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ConsoleMessage"/> struct.
