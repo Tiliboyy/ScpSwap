@@ -58,7 +58,7 @@ namespace ScpSwap
         /// Gets or sets the console message to send to the receiver of a swap request.
         /// </summary>
         [Description("The console message to send to the receiver of a swap request.")]
-        public ConsoleMessage RequestConsoleMessage { get; set; } = new ConsoleMessage($"You have received a swap request from $SenderName who is SCP-$RoleName. Would you like to swap with them? Type \".scpswap accept\" to accept or \".scpswap decline\" to decline.", "yellow");
+        public ConsoleMessage RequestConsoleMessage { get; set; } = new ConsoleMessage("You have received a swap request from $SenderName who is $RoleName. Would you like to swap with them? Type \".scpswap accept\" to accept or \".scpswap decline\" to decline.", "yellow");
 
         /// <summary>
         /// Gets or sets the console message to send to the sender of a swap request that has timed out.

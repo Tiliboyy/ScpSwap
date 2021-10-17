@@ -12,10 +12,17 @@ namespace ScpSwap.Models
     /// <summary>
     /// Container to make translations for console messages more fun.
     /// </summary>
-    public readonly struct ConsoleMessage
+    public class ConsoleMessage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConsoleMessage"/> struct.
+        /// Initializes a new instance of the <see cref="ConsoleMessage"/> class.
+        /// </summary>
+        public ConsoleMessage()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConsoleMessage"/> class.
         /// </summary>
         /// <param name="message"><inheritdoc cref="Message"/></param>
         /// <param name="color"><inheritdoc cref="Color"/></param>
@@ -26,14 +33,14 @@ namespace ScpSwap.Models
         }
 
         /// <summary>
-        /// Gets the message to send.
+        /// Gets or sets the message to send.
         /// </summary>
-        public string Message { get; }
+        public string Message { get; set; }
 
         /// <summary>
-        /// Gets the color to use.
+        /// Gets or sets the color to use.
         /// </summary>
-        public string Color { get; }
+        public string Color { get; set; }
 
         /// <summary>
         /// Sends the message to a given player.
