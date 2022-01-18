@@ -108,8 +108,8 @@ namespace ScpSwap.Models
             senderData.Swap(Receiver);
             receiverData.Swap(Sender);
 
-            Sender.SendConsoleMessage("Swap successful!", "green");
-            Receiver.SendConsoleMessage("Swap successful!", "green");
+            Plugin.Instance.Translation.SwapSuccessful.SendTo(Sender);
+            Plugin.Instance.Translation.SwapSuccessful.SendTo(Receiver);
             Swaps.Remove(this);
         }
 
@@ -127,7 +127,7 @@ namespace ScpSwap.Models
         /// </summary>
         public void Decline()
         {
-            Sender.Broadcast(5, $"{Receiver.Nickname} has declined your swap request.", shouldClearPrevious: true);
+            Sender.Broadcast(5, $"{Receiver.DisplayNickname ?? Receiver.Nickname} has declined your swap request.", shouldClearPrevious: true);
             Destroy();
         }
 
@@ -148,7 +148,7 @@ namespace ScpSwap.Models
         private void SendRequestMessages()
         {
             string consoleMessage = Plugin.Instance.Translation.RequestConsoleMessage.Message;
-            consoleMessage = consoleMessage.Replace("$SenderName", Sender.Nickname);
+            consoleMessage = consoleMessage.Replace("$SenderName", Sender.DisplayNickname ?? Sender.Nickname);
             consoleMessage = consoleMessage.Replace("$RoleName", ValidSwaps.GetCustom(Sender)?.Name ?? Sender.Role.ToString());
             Receiver.SendConsoleMessage(consoleMessage, Plugin.Instance.Translation.RequestConsoleMessage.Color);
             Receiver.Broadcast(Plugin.Instance.Translation.RequestBroadcast);

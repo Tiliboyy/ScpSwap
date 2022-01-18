@@ -7,11 +7,13 @@
 
 namespace ScpSwap.Models
 {
+    using System;
     using Exiled.API.Features;
 
     /// <summary>
     /// Container to make translations for console messages more fun.
     /// </summary>
+    [Serializable]
     public class ConsoleMessage
     {
         /// <summary>

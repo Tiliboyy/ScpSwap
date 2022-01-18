@@ -11,6 +11,7 @@ namespace ScpSwap
     using System.ComponentModel;
     using Exiled.API.Features;
     using Exiled.API.Interfaces;
+    using ScpSwap.Configs;
     using ScpSwap.Models;
 
     /// <inheritdoc />
@@ -22,24 +23,24 @@ namespace ScpSwap
         [Description("A collection of custom names with their correlating RoleType.")]
         public Dictionary<string, RoleType> TranslatableSwaps { get; set; } = new Dictionary<string, RoleType>
         {
-            ["173"] = RoleType.Scp173,
-            ["peanut"] = RoleType.Scp173,
-            ["939"] = RoleType.Scp93953,
-            ["dog"] = RoleType.Scp93953,
-            ["079"] = RoleType.Scp079,
-            ["79"] = RoleType.Scp079,
-            ["computer"] = RoleType.Scp079,
-            ["106"] = RoleType.Scp106,
-            ["larry"] = RoleType.Scp106,
-            ["096"] = RoleType.Scp096,
-            ["96"] = RoleType.Scp096,
-            ["shyguy"] = RoleType.Scp096,
-            ["049"] = RoleType.Scp049,
-            ["49"] = RoleType.Scp049,
-            ["doctor"] = RoleType.Scp049,
-            ["0492"] = RoleType.Scp0492,
-            ["492"] = RoleType.Scp0492,
-            ["zombie"] = RoleType.Scp0492,
+            { "173", RoleType.Scp173 },
+            { "peanut", RoleType.Scp173 },
+            { "939", RoleType.Scp93953 },
+            { "dog", RoleType.Scp93953 },
+            { "079", RoleType.Scp079 },
+            { "79", RoleType.Scp079 },
+            { "computer", RoleType.Scp079 },
+            { "106", RoleType.Scp106 },
+            { "larry", RoleType.Scp106 },
+            { "096", RoleType.Scp106 },
+            { "96", RoleType.Scp096 },
+            { "shyguy", RoleType.Scp096 },
+            { "049", RoleType.Scp049 },
+            { "49", RoleType.Scp049 },
+            { "doctor", RoleType.Scp049 },
+            { "0492", RoleType.Scp0492 },
+            { "492", RoleType.Scp0492 },
+            { "zombie", RoleType.Scp0492 },
         };
 
         /// <summary>
@@ -61,15 +62,27 @@ namespace ScpSwap
         public ConsoleMessage RequestConsoleMessage { get; set; } = new ConsoleMessage("You have received a swap request from $SenderName who is $RoleName. Would you like to swap with them? Type \".scpswap accept\" to accept or \".scpswap decline\" to decline.", "yellow");
 
         /// <summary>
-        /// Gets or sets the console message to send to the sender of a swap request that has timed out.
+        /// Gets or sets the console message to send to players when the swap succeeds.
         /// </summary>
-        [Description("The console message to send to the sender of a swap request that has timed out.")]
-        public ConsoleMessage TimeoutSender { get; set; } = new ConsoleMessage("The player did not respond to your request.", "red");
+        [Description("The console message to send to players when the swap succeeds.")]
+        public ConsoleMessage SwapSuccessful { get; set; } = new ConsoleMessage("Swap successful!", "green");
 
         /// <summary>
         /// Gets or sets the console message to send to the receiver of a swap request that has timed out.
         /// </summary>
         [Description("The console message to send to the receiver of a swap request that has timed out.")]
         public ConsoleMessage TimeoutReceiver { get; set; } = new ConsoleMessage("Your swap request has timed out.", "red");
+
+        /// <summary>
+        /// Gets or sets the console message to send to the sender of a swap request that has timed out.
+        /// </summary>
+        [Description("The console message to send to the sender of a swap request that has timed out.")]
+        public ConsoleMessage TimeoutSender { get; set; } = new ConsoleMessage("The player did not respond to your request.", "red");
+
+        /// <summary>
+        /// Gets or sets the various command instances to be translated.
+        /// </summary>
+        [Description("The various command instances to be translated.")]
+        public CommandTranslations CommandTranslations { get; set; } = new CommandTranslations();
     }
 }

@@ -9,6 +9,8 @@ namespace ScpSwap
 {
     using System;
     using Exiled.API.Features;
+    using PlayerHandlers = Exiled.Events.Handlers.Player;
+    using ServerHandlers = Exiled.Events.Handlers.Server;
 
     /// <summary>
     /// The main plugin class.
@@ -23,16 +25,16 @@ namespace ScpSwap
         public static Plugin Instance { get; private set; }
 
         /// <inheritdoc />
-        public override string Author { get; } = "Build";
+        public override string Author => "Build";
 
         /// <inheritdoc />
-        public override string Name { get; } = "ScpSwap";
+        public override string Name => "ScpSwap";
 
         /// <inheritdoc />
-        public override string Prefix { get; } = "scpswap";
+        public override string Prefix => "ScpSwap";
 
         /// <inheritdoc />
-        public override Version RequiredExiledVersion { get; } = new Version(3, 0, 0);
+        public override Version RequiredExiledVersion { get; } = new Version(4, 2, 2);
 
         /// <inheritdoc />
         public override Version Version { get; } = new Version(1, 0, 0);
@@ -41,23 +43,27 @@ namespace ScpSwap
         public override void OnEnabled()
         {
             Instance = this;
+
             eventHandlers = new EventHandlers(this);
-            Exiled.Events.Handlers.Server.ReloadedConfigs += eventHandlers.OnReloadedConfigs;
-            Exiled.Events.Handlers.Server.RestartingRound += eventHandlers.OnRestartingRound;
-            Exiled.Events.Handlers.Server.RoundStarted += eventHandlers.OnRoundStarted;
-            Exiled.Events.Handlers.Server.WaitingForPlayers += eventHandlers.OnWaitingForPlayers;
+            PlayerHandlers.ChangingRole += eventHandlers.OnChangingRole;
+            ServerHandlers.ReloadedConfigs += eventHandlers.OnReloadedConfigs;
+            ServerHandlers.RestartingRound += eventHandlers.OnRestartingRound;
+            ServerHandlers.WaitingForPlayers += eventHandlers.OnWaitingForPlayers;
+
             base.OnEnabled();
         }
 
         /// <inheritdoc />
         public override void OnDisabled()
         {
-            Exiled.Events.Handlers.Server.ReloadedConfigs -= eventHandlers.OnReloadedConfigs;
-            Exiled.Events.Handlers.Server.RestartingRound -= eventHandlers.OnRestartingRound;
-            Exiled.Events.Handlers.Server.RoundStarted -= eventHandlers.OnRoundStarted;
-            Exiled.Events.Handlers.Server.WaitingForPlayers -= eventHandlers.OnWaitingForPlayers;
+            PlayerHandlers.ChangingRole -= eventHandlers.OnChangingRole;
+            ServerHandlers.ReloadedConfigs -= eventHandlers.OnReloadedConfigs;
+            ServerHandlers.RestartingRound -= eventHandlers.OnRestartingRound;
+            ServerHandlers.WaitingForPlayers -= eventHandlers.OnWaitingForPlayers;
             eventHandlers = null;
+
             Instance = null;
+
             base.OnDisabled();
         }
     }

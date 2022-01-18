@@ -109,7 +109,8 @@ namespace ScpSwap
             CustomSwapsValue.Clear();
             foreach (CustomSwap customSwap in CustomSwap.Registered)
             {
-                if (Plugin.Instance.Config.BlacklistedNames.Contains(customSwap.Name, StringComparison.OrdinalIgnoreCase))
+                if (Plugin.Instance.Config.BlacklistedNames != null &&
+                    Plugin.Instance.Config.BlacklistedNames.Contains(customSwap.Name, StringComparison.OrdinalIgnoreCase))
                     continue;
 
                 CustomSwapsValue.Add(customSwap);
@@ -125,7 +126,8 @@ namespace ScpSwap
 
             foreach (KeyValuePair<string, RoleType> kvp in Plugin.Instance.Translation.TranslatableSwaps)
             {
-                if (Plugin.Instance.Config.BlacklistedScps.Contains(kvp.Value) || kvp.Value.GetTeam() != Team.SCP)
+                if ((Plugin.Instance.Config.BlacklistedScps != null && Plugin.Instance.Config.BlacklistedScps.Contains(kvp.Value))
+                    || kvp.Value.GetTeam() != Team.SCP)
                     continue;
 
                 if (NamesValue.Contains(kvp.Key, StringComparison.OrdinalIgnoreCase))
@@ -144,7 +146,8 @@ namespace ScpSwap
             DefaultSwapsValue.Clear();
             foreach (RoleType role in Enum.GetValues(typeof(RoleType)))
             {
-                if (Plugin.Instance.Config.BlacklistedScps.Contains(role) || role.GetTeam() != Team.SCP)
+                if ((Plugin.Instance.Config.BlacklistedScps != null && Plugin.Instance.Config.BlacklistedScps.Contains(role))
+                    || role.GetTeam() != Team.SCP)
                     continue;
 
                 string roleText = role.ToString();

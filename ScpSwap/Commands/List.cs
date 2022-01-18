@@ -21,7 +21,7 @@ namespace ScpSwap.Commands
         public string Command { get; } = "list";
 
         /// <inheritdoc />
-        public string[] Aliases { get; } = Array.Empty<string>();
+        public string[] Aliases { get; } = { "l" };
 
         /// <inheritdoc />
         public string Description { get; } = "Lists all valid swappable roles.";

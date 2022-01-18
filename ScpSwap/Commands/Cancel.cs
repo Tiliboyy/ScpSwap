@@ -21,7 +21,7 @@ namespace ScpSwap.Commands
         public string Command { get; } = "cancel";
 
         /// <inheritdoc />
-        public string[] Aliases { get; } = Array.Empty<string>();
+        public string[] Aliases { get; } = { "c" };
 
         /// <inheritdoc />
         public string Description { get; } = "Cancels an active swap request.";
@@ -30,6 +30,12 @@ namespace ScpSwap.Commands
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             Player playerSender = Player.Get(sender);
+            if (playerSender == null)
+            {
+                response = "This command must be from the game level.";
+                return false;
+            }
+
             Swap swap = Swap.FromSender(playerSender);
             if (swap == null)
             {

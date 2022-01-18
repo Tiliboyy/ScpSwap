@@ -7,8 +7,8 @@
 
 namespace ScpSwap
 {
+    using System;
     using System.ComponentModel;
-    using Exiled.API.Features;
     using Exiled.API.Interfaces;
 
     /// <inheritdoc />
@@ -54,6 +54,6 @@ namespace ScpSwap
         /// Gets or sets a collection of the names of custom scps blacklisted from being swapped to. This must match the name the developer integrated the SCP into this plugin's API with.
         /// </summary>
         [Description("A collection of the names of custom scps blacklisted from being swapped to. This must match the name the developer integrated the SCP into this plugin's API with.")]
-        public string[] BlacklistedNames { get; set; } = { };
+        public string[] BlacklistedNames { get; set; } = Array.Empty<string>();
     }
 }

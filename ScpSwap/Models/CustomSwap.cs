@@ -52,34 +52,32 @@ namespace ScpSwap.Models
         /// <summary>
         /// Attempts to register a <see cref="CustomSwap"/>.
         /// </summary>
-        /// <param name="customSwap">The <see cref="CustomSwap"/> to register.</param>
         /// <returns>A value indicating whether the <see cref="CustomSwap"/> registered successfully.</returns>
-        public static bool TryRegister(CustomSwap customSwap)
+        public bool TryRegister()
         {
             foreach (CustomSwap swap in Registered)
             {
-                if (string.Equals(customSwap.Name, swap.Name, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(Name, swap.Name, StringComparison.OrdinalIgnoreCase))
                 {
-                    Log.Warn($"Attempted to register a {nameof(CustomSwap)} with a duplicate name of {customSwap.Name}.");
+                    Log.Warn($"Attempted to register a {nameof(CustomSwap)} with a duplicate name of {Name}.");
                     return false;
                 }
             }
 
-            Registered.Add(customSwap);
+            Registered.Add(this);
             return true;
         }
 
         /// <summary>
         /// Attempts to unregister a <see cref="CustomSwap"/>.
         /// </summary>
-        /// <param name="customSwap">The <see cref="CustomSwap"/> to unregister.</param>
         /// <returns>A value indicating whether the <see cref="CustomSwap"/> registered successfully.</returns>
-        public static bool TryUnregister(CustomSwap customSwap)
+        public bool TryUnregister()
         {
-            if (Registered.Remove(customSwap))
+            if (Registered.Remove(this))
                 return true;
 
-            Log.Warn($"Attempted to remove an unregistered {nameof(CustomSwap)} with a name of {customSwap.Name}.");
+            Log.Warn($"Attempted to remove an unregistered {nameof(CustomSwap)} with a name of {Name}.");
             return false;
         }
     }

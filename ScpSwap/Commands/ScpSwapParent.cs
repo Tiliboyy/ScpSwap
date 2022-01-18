@@ -10,8 +10,8 @@ namespace ScpSwap.Commands
     using System;
     using System.Linq;
     using CommandSystem;
-    using Exiled.API.Extensions;
     using Exiled.API.Features;
+    using ScpSwap.Configs;
     using ScpSwap.Models;
 
     /// <summary>
@@ -29,7 +29,7 @@ namespace ScpSwap.Commands
         public override string Command { get; } = "scpswap";
 
         /// <inheritdoc />
-        public override string[] Aliases { get; } = Array.Empty<string>();
+        public override string[] Aliases { get; } = { "swap" };
 
         /// <inheritdoc />
         public override string Description { get; } = "Base command for ScpSwapParent.";
@@ -40,10 +40,12 @@ namespace ScpSwap.Commands
         /// <inheritdoc />
         public sealed override void LoadGeneratedCommands()
         {
-            RegisterCommand(new Accept());
-            RegisterCommand(new Cancel());
-            RegisterCommand(new Decline());
-            RegisterCommand(new List());
+            CommandTranslations commandTranslations = Plugin.Instance.Translation.CommandTranslations;
+
+            RegisterCommand(commandTranslations.Accept);
+            RegisterCommand(commandTranslations.Cancel);
+            RegisterCommand(commandTranslations.Decline);
+            RegisterCommand(commandTranslations.List);
         }
 
         /// <inheritdoc />
