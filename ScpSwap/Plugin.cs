@@ -34,10 +34,10 @@ namespace ScpSwap
         public override string Prefix => "ScpSwap";
 
         /// <inheritdoc />
-        public override Version RequiredExiledVersion { get; } = new Version(4, 2, 2);
+        public override Version RequiredExiledVersion { get; } = new Version(4, 2, 3);
 
         /// <inheritdoc />
-        public override Version Version { get; } = new Version(1, 0, 0);
+        public override Version Version { get; } = new Version(1, 1, 0);
 
         /// <inheritdoc />
         public override void OnEnabled()
