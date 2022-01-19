@@ -7,9 +7,9 @@
 
 namespace ScpSwap
 {
-    using Exiled.API.Extensions;
     using Exiled.API.Features;
     using Exiled.Events.EventArgs;
+    using MEC;
     using ScpSwap.Models;
 
     /// <summary>
@@ -28,8 +28,15 @@ namespace ScpSwap
         /// <inheritdoc cref="Exiled.Events.Handlers.Server.OnRoundStarted"/>
         public void OnChangingRole(ChangingRoleEventArgs ev)
         {
-            if (ev.NewRole.GetTeam() == Team.SCP && Round.ElapsedTime.TotalSeconds < plugin.Config.SwapTimeout)
-                ev.Player.Broadcast(plugin.Translation.StartMessage);
+            if (!ev.IsAllowed || ev.Player.IsScp || ValidSwaps.GetCustom(ev.Player) != null)
+                return;
+
+            Timing.CallDelayed(0.1f, () =>
+            {
+                if ((ev.Player.IsScp || ValidSwaps.GetCustom(ev.Player) != null) &&
+                    Round.ElapsedTime.TotalSeconds < plugin.Config.SwapTimeout)
+                    ev.Player.Broadcast(plugin.Translation.StartMessage);
+            });
         }
 
         /// <inheritdoc cref="Exiled.Events.Handlers.Server.OnReloadedConfigs"/>
