@@ -15,6 +15,11 @@ namespace ScpSwap.Configs
     public class CommandTranslations
     {
         /// <summary>
+        /// Gets or sets a configurable instance of the <see cref="Commands.ScpSwapParent"/> command.
+        /// </summary>
+        public ScpSwapParent ParentCommand { get; set; } = new ScpSwapParent();
+
+        /// <summary>
         /// Gets or sets a configurable instance of the <see cref="Commands.Accept"/> command.
         /// </summary>
         public Accept Accept { get; set; } = new Accept();

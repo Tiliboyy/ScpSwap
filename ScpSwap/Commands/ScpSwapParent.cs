@@ -17,8 +17,7 @@ namespace ScpSwap.Commands
     /// <summary>
     /// The base command for ScpSwapParent.
     /// </summary>
-    [CommandHandler(typeof(ClientCommandHandler))]
-    public class ScpSwapParent : ParentCommand, IUsageProvider
+    public class ScpSwapParent : ParentCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ScpSwapParent"/> class.
@@ -33,9 +32,6 @@ namespace ScpSwap.Commands
 
         /// <inheritdoc />
         public override string Description { get; } = "Base command for ScpSwapParent.";
-
-        /// <inheritdoc />
-        public string[] Usage { get; } = { "ScpNumber" };
 
         /// <inheritdoc />
         public sealed override void LoadGeneratedCommands()
@@ -65,7 +61,7 @@ namespace ScpSwap.Commands
 
             if (arguments.IsEmpty())
             {
-                response = $"Usage: .{Command} {string.Join(" ", Usage)}";
+                response = $"Usage: .{Command} ScpNumber";
                 return false;
             }
 

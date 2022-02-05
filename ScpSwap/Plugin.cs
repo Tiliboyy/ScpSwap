@@ -9,6 +9,7 @@ namespace ScpSwap
 {
     using System;
     using Exiled.API.Features;
+    using RemoteAdmin;
     using PlayerHandlers = Exiled.Events.Handlers.Player;
     using ServerHandlers = Exiled.Events.Handlers.Server;
 
@@ -50,12 +51,15 @@ namespace ScpSwap
             ServerHandlers.RestartingRound += eventHandlers.OnRestartingRound;
             ServerHandlers.WaitingForPlayers += eventHandlers.OnWaitingForPlayers;
 
+            QueryProcessor.DotCommandHandler.RegisterCommand(Translation.CommandTranslations.ParentCommand);
             base.OnEnabled();
         }
 
         /// <inheritdoc />
         public override void OnDisabled()
         {
+            QueryProcessor.DotCommandHandler.UnregisterCommand(Translation.CommandTranslations.ParentCommand);
+
             PlayerHandlers.ChangingRole -= eventHandlers.OnChangingRole;
             ServerHandlers.ReloadedConfigs -= eventHandlers.OnReloadedConfigs;
             ServerHandlers.RestartingRound -= eventHandlers.OnRestartingRound;
