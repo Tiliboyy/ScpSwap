@@ -18,13 +18,13 @@ namespace ScpSwap.Commands
     public class List : ICommand
     {
         /// <inheritdoc />
-        public string Command { get; } = "list";
+        public string Command { get; set; } = "list";
 
         /// <inheritdoc />
-        public string[] Aliases { get; } = { "l" };
+        public string[] Aliases { get; set; } = { "l" };
 
         /// <inheritdoc />
-        public string Description { get; } = "Lists all valid swappable roles.";
+        public string Description { get; set; } = "Lists all valid swappable roles.";
 
         /// <inheritdoc />
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)

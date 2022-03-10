@@ -18,13 +18,13 @@ namespace ScpSwap.Commands
     public class Decline : ICommand
     {
         /// <inheritdoc />
-        public string Command { get; } = "decline";
+        public string Command { get; set; } = "decline";
 
         /// <inheritdoc />
-        public string[] Aliases { get; } = { "no", "d" };
+        public string[] Aliases { get; set; } = { "no", "d" };
 
         /// <inheritdoc />
-        public string Description { get; } = "Rejects an active swap request.";
+        public string Description { get; set; } = "Rejects an active swap request.";
 
         /// <inheritdoc />
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)

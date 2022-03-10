@@ -39,7 +39,7 @@ namespace ScpSwap.Models
         public void Swap(Player player)
         {
             if (customSwap == null)
-                player.Role = role;
+                player.Role.Type = role;
             else
                 customSwap.SpawnMethod(player);
 

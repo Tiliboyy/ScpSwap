@@ -17,6 +17,7 @@ namespace ScpSwap.Commands
     /// <summary>
     /// The base command for ScpSwapParent.
     /// </summary>
+    [CommandHandler(typeof(ClientCommandHandler))]
     public class ScpSwapParent : ParentCommand
     {
         /// <summary>
@@ -25,13 +26,13 @@ namespace ScpSwap.Commands
         public ScpSwapParent() => LoadGeneratedCommands();
 
         /// <inheritdoc />
-        public override string Command { get; } = "scpswap";
+        public override string Command => "scpswap";
 
         /// <inheritdoc />
         public override string[] Aliases { get; } = { "swap" };
 
         /// <inheritdoc />
-        public override string Description { get; } = "Base command for ScpSwapParent.";
+        public override string Description => "Base command for ScpSwapParent.";
 
         /// <inheritdoc />
         public sealed override void LoadGeneratedCommands()
@@ -47,6 +48,13 @@ namespace ScpSwap.Commands
         /// <inheritdoc />
         protected override bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
+            Player playerSender = Player.Get(sender);
+            if (playerSender is null)
+            {
+                response = "This command must be executed at the game level.";
+                return false;
+            }
+
             if (!Round.IsStarted)
             {
                 response = "The round has not yet started.";
@@ -65,7 +73,6 @@ namespace ScpSwap.Commands
                 return false;
             }
 
-            Player playerSender = Player.Get(sender);
             if (!playerSender.IsScp && ValidSwaps.GetCustom(playerSender) == null)
             {
                 response = "I don't believe you are an Scp.";
@@ -109,7 +116,7 @@ namespace ScpSwap.Commands
             return false;
         }
 
-        private Player GetReceiver(string request, out Action<Player> spawnMethod)
+        private static Player GetReceiver(string request, out Action<Player> spawnMethod)
         {
             CustomSwap customSwap = ValidSwaps.GetCustom(request);
             if (customSwap != null)
@@ -121,7 +128,7 @@ namespace ScpSwap.Commands
             RoleType roleSwap = ValidSwaps.Get(request);
             if (roleSwap != RoleType.None)
             {
-                spawnMethod = player => player.Role = roleSwap;
+                spawnMethod = player => player.Role.Type = roleSwap;
                 return Player.List.FirstOrDefault(player => player.Role == roleSwap);
             }
 

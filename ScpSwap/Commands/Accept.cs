@@ -18,13 +18,13 @@ namespace ScpSwap.Commands
     public class Accept : ICommand
     {
         /// <inheritdoc />
-        public string Command { get; } = "accept";
+        public string Command { get; set; } = "accept";
 
         /// <inheritdoc />
-        public string[] Aliases { get; } = { "yes", "y" };
+        public string[] Aliases { get; set; } = { "yes", "y" };
 
         /// <inheritdoc />
-        public string Description { get; } = "Accepts an active swap request.";
+        public string Description { get; set; } = "Accepts an active swap request.";
 
         /// <inheritdoc />
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
