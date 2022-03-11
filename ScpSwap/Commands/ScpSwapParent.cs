@@ -32,7 +32,7 @@ namespace ScpSwap.Commands
         public override string[] Aliases { get; } = { "swap" };
 
         /// <inheritdoc />
-        public override string Description => "Base command for ScpSwapParent.";
+        public override string Description => "Base command for ScpSwap.";
 
         /// <inheritdoc />
         public sealed override void LoadGeneratedCommands()
@@ -49,7 +49,7 @@ namespace ScpSwap.Commands
         protected override bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             Player playerSender = Player.Get(sender);
-            if (playerSender is null)
+            if (playerSender == null)
             {
                 response = "This command must be executed at the game level.";
                 return false;
@@ -90,7 +90,7 @@ namespace ScpSwap.Commands
             {
                 if (playerSender == receiver)
                 {
-                    response = "You can't swap with yourself, idiot.";
+                    response = "You can't swap with yourself.";
                     return false;
                 }
 
