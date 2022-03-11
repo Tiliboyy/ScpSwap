@@ -75,7 +75,7 @@ namespace ScpSwap.Commands
 
             if (!playerSender.IsScp && ValidSwaps.GetCustom(playerSender) == null)
             {
-                response = "I don't believe you are an Scp.";
+                response = "You must be an Scp to use this command.";
                 return false;
             }
 
@@ -86,14 +86,14 @@ namespace ScpSwap.Commands
             }
 
             Player receiver = GetReceiver(arguments.At(0), out Action<Player> spawnMethod);
+            if (playerSender == receiver)
+            {
+                response = "You can't swap with yourself.";
+                return false;
+            }
+
             if (receiver != null)
             {
-                if (playerSender == receiver)
-                {
-                    response = "You can't swap with yourself.";
-                    return false;
-                }
-
                 Swap.Send(playerSender, receiver);
                 response = "Request sent!";
                 return true;
