@@ -32,7 +32,7 @@ namespace ScpSwap
             { "computer", RoleType.Scp079 },
             { "106", RoleType.Scp106 },
             { "larry", RoleType.Scp106 },
-            { "096", RoleType.Scp106 },
+            { "096", RoleType.Scp096 },
             { "96", RoleType.Scp096 },
             { "shyguy", RoleType.Scp096 },
             { "049", RoleType.Scp049 },
