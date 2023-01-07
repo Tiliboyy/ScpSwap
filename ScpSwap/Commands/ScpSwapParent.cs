@@ -5,6 +5,9 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Exiled.API.Enums;
+using PlayerRoles;
+
 namespace ScpSwap.Commands
 {
     using System;
@@ -125,10 +128,10 @@ namespace ScpSwap.Commands
                 return Player.List.FirstOrDefault(player => customSwap.VerificationMethod(player));
             }
 
-            RoleType roleSwap = ValidSwaps.Get(request);
-            if (roleSwap != RoleType.None)
+            RoleTypeId roleSwap = ValidSwaps.Get(request);
+            if (roleSwap != RoleTypeId.None)
             {
-                spawnMethod = player => player.Role.Type = roleSwap;
+                spawnMethod = player => player.Role.Set(roleSwap, SpawnReason.None);
                 return Player.List.FirstOrDefault(player => player.Role == roleSwap);
             }
 

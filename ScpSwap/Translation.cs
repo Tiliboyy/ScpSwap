@@ -5,6 +5,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using PlayerRoles;
+
 namespace ScpSwap
 {
     using System.Collections.Generic;
@@ -18,29 +20,29 @@ namespace ScpSwap
     public class Translation : ITranslation
     {
         /// <summary>
-        /// Gets or sets a collection of custom names with their correlating <see cref="RoleType"/>.
+        /// Gets or sets a collection of custom names with their correlating <see cref="RoleTypeId"/>.
         /// </summary>
         [Description("A collection of custom names with their correlating RoleType.")]
-        public Dictionary<string, RoleType> TranslatableSwaps { get; set; } = new Dictionary<string, RoleType>
+        public Dictionary<string, RoleTypeId> TranslatableSwaps { get; set; } = new Dictionary<string, RoleTypeId>
         {
-            { "173", RoleType.Scp173 },
-            { "peanut", RoleType.Scp173 },
-            { "939", RoleType.Scp93953 },
-            { "dog", RoleType.Scp93953 },
-            { "079", RoleType.Scp079 },
-            { "79", RoleType.Scp079 },
-            { "computer", RoleType.Scp079 },
-            { "106", RoleType.Scp106 },
-            { "larry", RoleType.Scp106 },
-            { "096", RoleType.Scp096 },
-            { "96", RoleType.Scp096 },
-            { "shyguy", RoleType.Scp096 },
-            { "049", RoleType.Scp049 },
-            { "49", RoleType.Scp049 },
-            { "doctor", RoleType.Scp049 },
-            { "0492", RoleType.Scp0492 },
-            { "492", RoleType.Scp0492 },
-            { "zombie", RoleType.Scp0492 },
+            { "173", RoleTypeId.Scp173 },
+            { "peanut", RoleTypeId.Scp173 },
+            { "939", RoleTypeId.Scp939 },
+            { "dog", RoleTypeId.Scp939 },
+            { "079", RoleTypeId.Scp079 },
+            { "79", RoleTypeId.Scp079 },
+            { "computer", RoleTypeId.Scp079 },
+            { "106", RoleTypeId.Scp106 },
+            { "larry", RoleTypeId.Scp106 },
+            { "096", RoleTypeId.Scp096 },
+            { "96", RoleTypeId.Scp096 },
+            { "shyguy", RoleTypeId.Scp096 },
+            { "049", RoleTypeId.Scp049 },
+            { "49", RoleTypeId.Scp049 },
+            { "doctor", RoleTypeId.Scp049 },
+            { "0492", RoleTypeId.Scp0492 },
+            { "492", RoleTypeId.Scp0492 },
+            { "zombie", RoleTypeId.Scp0492 },
         };
 
         /// <summary>

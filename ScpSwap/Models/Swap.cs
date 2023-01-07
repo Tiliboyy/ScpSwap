@@ -5,6 +5,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Exiled.Events.EventArgs.Player;
+
 namespace ScpSwap.Models
 {
     using System.Collections.Generic;

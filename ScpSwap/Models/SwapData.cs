@@ -5,6 +5,9 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Exiled.API.Enums;
+using PlayerRoles;
+
 namespace ScpSwap.Models
 {
     using Exiled.API.Features;
@@ -16,7 +19,7 @@ namespace ScpSwap.Models
     public class SwapData
     {
         private readonly CustomSwap customSwap;
-        private readonly RoleType role;
+        private readonly RoleTypeId role;
         private readonly Vector3 position;
         private readonly float health;
 
@@ -39,7 +42,7 @@ namespace ScpSwap.Models
         public void Swap(Player player)
         {
             if (customSwap == null)
-                player.Role.Type = role;
+                player.Role.Set(role, SpawnReason.None);
             else
                 customSwap.SpawnMethod(player);
 
